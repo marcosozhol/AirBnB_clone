@@ -1,4 +1,4 @@
-#In this repository we carry out the projets AirBnb Clone
+# In this repository we carry out the projets AirBnb Clone
 
 ## description of the project:
 

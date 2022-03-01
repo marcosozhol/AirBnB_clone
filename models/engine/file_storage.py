@@ -5,7 +5,7 @@
 import json
 
 
-class FileStorage
+class FileStorage():
 """File Storage Class
     This is the File Storage module.
     Attributes:

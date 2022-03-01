@@ -1,6 +1,8 @@
+<h1><img src="images/hbnb img.png" alt="logo python" width="650" height="270"><br/><b>0x00. AirBnB clone - The console</b></h1>
+
 # In this repository we carry out the projets AirBnb Clone
 
-## description of the project:
+## Description of the project:
 
 In this project we will develop a clone of the AirBnb app.
 This application is responsible for making accommodation offers
@@ -9,7 +11,7 @@ It will be a teamwork of two people and is divided into
 different parts, this is the first, which consists in the development
 from the console.
 
-## description of the command interpreter:
+## Description of the command interpreter:
 
 In this case, we want to be able to manage the objects of our project:
 
@@ -66,7 +68,5 @@ e.g., For models/user.py, unit tests must be in: tests/test_models/test_user.py
 
 ## Authors:
 
-- Oscar Bedat
-- Marco Sózaro
-
-
+* **Oscar Bedat** - [Linkedin](https://www.linkedin.com/in/oscarbedat/)
+* **Marco Sózaro** - [Linkedin](https://www.linkedin.com/in/marco-s%C3%B3zaro-76826364/)

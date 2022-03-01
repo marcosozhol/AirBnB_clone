@@ -5,8 +5,8 @@
 import json
 
 
-class FileStorage
-"""File Storage Class
+class FileStorage():
+    """File Storage Class
     This is the File Storage module.
     Attributes:
         __file_path (str): This is the path of the JSON file in which

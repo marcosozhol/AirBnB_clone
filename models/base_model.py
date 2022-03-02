@@ -1,10 +1,12 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 """Create class BaseModel that defines all common
    attributes/methods for other class
 """
-from uuid import uuid4
+
 from datetime import datetime
-from models import storage
+import models
+import uuid
 
 
 class BaseModel:
@@ -20,7 +22,7 @@ class BaseModel:
         """
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
         self.updated_at = datetime.now()
-        self.id = str(uuid4())
+        self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         if len(kwargs) > 0:
             for key, value in kwargs.items():
@@ -30,7 +32,7 @@ class BaseModel:
                     if key != "__class__":
                         self.__dict__[key] = value
         else:
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """Representation of the class for the user
@@ -41,7 +43,9 @@ class BaseModel:
             class with this format
             $ [<class name>] (<self.id>) <self.__dict__>
         """
-        return '[{}] ({}) {}'.format(class_name, self.id, self.__dict__)
+        return '[{}] ({}) {}'.format(
+                self.__class__.__name__, self.id, self.__dict__
+            )
 
     def save(self):
         """Updates a Base Model instance
@@ -49,8 +53,8 @@ class BaseModel:
         with the current datetime and dumps the class data
         into a file
         """
-        self.update_at = datetime.now()
-        storage.save()
+        self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """Converts the information of the class to human-readable format
@@ -58,7 +62,8 @@ class BaseModel:
         of __dict__ of the instance.
         """
         dict_n = self.__dict__.copy()
-        dict_n["__class__"] = self.__class__.__name__
-        dict_n["created_at"] = self.created_at.isoformat()
-        dict_n["updated_at"] = self.updated_at.isoformat()
+        dict_n['__class__'] = self.__class__.__name__
+        dict_n['created_at'] = self.created_at.isoformat()
+        dict_n['updated_at'] = self.updated_at.isoformat()
+
         return dict_n

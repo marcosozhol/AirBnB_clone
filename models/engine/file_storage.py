@@ -38,11 +38,12 @@ class FileStorage():
         to the path of `__file_path` class attribute in JSON format
         with the `created_at` and `updated_at` formatted.
         """
-        json_dict = {}
+
+        new = {}
         with open(self.__file_path, mode='w', encoding='utf-8') as my_file:
             for key, value in FileStorage.__objects.items():
-                json_dict.update({key: value.to_dict()})
-            my_file.write(json.dumps(json_dict))
+                new.update({key: value.to_dict()})
+            my_file.write(json.dumps(new))
 
     def reload(self):
         """Deserializes the JSON file in `__file_path` class attribute
@@ -50,8 +51,16 @@ class FileStorage():
         on the file will be deserialized and appended to the `__objects`
         class attribute like an instance with the object data.
         """
-        if path.exists(self.__file_path):
+        try:
             with open(self.__file_path, mode='r', encoding='utf-8') as my_file:
-                json_dict = json.loads(my_file.read())
-                for key, value in json_dict.items():
-                    self.__objects[key] = eval(value['__class__'])(**value)
+                from models.base_model import BaseModel
+                """here sould continue more models
+                """
+                dict_n = json.loads(my_file.read())
+                for key, value in dict_n.items():
+                    class_name = value.get("__class__")
+                    objt = eval(class_name + "(**value)")
+                    FileStorage.__objects[key] = objt
+
+        except IOError:
+            pass

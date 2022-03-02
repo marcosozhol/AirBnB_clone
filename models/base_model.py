@@ -4,30 +4,44 @@
 """
 from uuid import uuid4
 from datetime import datetime
-
+from models import storage
 
 
 class BaseModel:
-    """Create a BaseModel class"""
+    """Base Model Class
+    This is the Base Model that take care of the
+    initialization, serialization and deserialization
+    of the future instances.
+    """
     def __init__(self, *args, **kwargs):
-        """Public instance attribute"""
-        if kwargs is not None:
+        """Base Model __init__ Method
+        Here, the default values of a Base Model
+        instance are initialized.
+        """
+        time_format = "%Y-%m-%dT%H:%M:%S.%f"
+        self.updated_at = datetime.now()
+        self.id = str(uuid4())
+        self.created_at = datetime.now()
+        if len(kwargs) > 0:
             for key, value in kwargs.items():
-                if key == "__class__":
-                    continue
-                elif key == "created_at" or key == "updated_at":
-                    iso_time = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                    setattr(self, key, iso_time)
+                if key == "created_at" or key == "updated_at":
+                    self.__dict__[key] = datetime.strptime(value, time_format)
                 else:
-                    setattr(self, key, value)
+                    if key != "__class__":
+                        self.__dict__[key] = value
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.datetime.now()
-            self.updated_at = datetime.datetime.now()
+            storage.new(self)
 
     def __str__(self):
-        """Print id and dict"""
-        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
+        """Representation of the class for the user
+        Example:
+            $ bm = BaseModel()
+            $ print(bm)
+            This method prints the content of the Base Model
+            class with this format
+            $ [<class name>] (<self.id>) <self.__dict__>
+        """
+        return '[{}] ({}) {}'.format(class_name, self.id, self.__dict__)
 
     def save(self):
         """Updates a Base Model instance
@@ -36,15 +50,15 @@ class BaseModel:
         into a file
         """
         self.update_at = datetime.now()
-        models.storage.save()
+        storage.save()
 
     def to_dict(self):
-        """
-        Returns a dictionary containing
-        all keys/values of __dict__
+        """Converts the information of the class to human-readable format
+        Returns a new dictionary containing all keys/values
+        of __dict__ of the instance.
         """
         dict_n = self.__dict__.copy()
-        dict_n.update({"__class__": self.__class__.__name__})
-        dict_n.update({"created_at": self.created_at.isoformat()})
-        dict_n.update({"updated_at": self.updated_at.isoformat()})
-        return (dict_n)
+        dict_n["__class__"] = self.__class__.__name__
+        dict_n["created_at"] = self.created_at.isoformat()
+        dict_n["updated_at"] = self.updated_at.isoformat()
+        return dict_n

@@ -40,19 +40,22 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
-    def do_create(self, arg):
+    def do_create(self, line):
         """Creates a new instance of a class"""
-        args = shlex.split(arg)
+        args = shlex.split(line)
+        """Split the passed arguments to interpret
+        them as console commands and store them in an array
+        """
         if len(args) == 0:
             print("** class name missing **")
             return False
         if args[0] in class_personalize:
             instance = class_personalize[args[0]]()
+            print(instance.id)
+            instance.save()
         else:
             print("** class doesn't exist **")
             return False
-        print(instance.id)
-        instance.save()
 
     def do_show(self, arg):
         """Prints an instance as a string based on the class and id"""
@@ -63,6 +66,11 @@ class HBNBCommand(cmd.Cmd):
         if args[0] in class_personalize:
             if len(args) > 1:
                 key = args[0] + "." + args[1]
+                """
+                En este caso si se pasan dos argumentos, concatena con punto
+                para poder ejecutar la accion, ej: show User, va a ejecutar
+                User.show para mostrar los datos de user.
+                """
                 if key in models.storage.all():
                     print(models.storage.all()[key])
                 else:

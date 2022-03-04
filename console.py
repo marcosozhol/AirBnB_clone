@@ -17,11 +17,14 @@ from models.state import State
 from models.user import User
 import shlex  # for splitting the line along spaces except in double quotes
 
+
 class_personalize = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+                     "Place": Place, "Review": Review, "State": State,
+                     "User": User}
+
 
 class HBNBCommand(cmd.Cmd):
-    """command processor class."""
+    """Command processor class."""
     prompt = '(hbnb) '
 
     def do_quit(self, line):
@@ -33,6 +36,7 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program.
         """
         return True
+
     def emptyline(self):
         """
         When an empty line is entered in response to the prompt,
@@ -138,11 +142,13 @@ class HBNBCommand(cmd.Cmd):
                                         args[3] = int(args[3])
                                     except:
                                         args[3] = 0
+
                                 elif args[2] in floats:
                                     try:
                                         args[3] = float(args[3])
                                     except:
                                         args[3] = 0.0
+
                             setattr(models.storage.all()[k], args[2], args[3])
                             models.storage.all()[k].save()
                         else:
@@ -155,6 +161,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
         else:
             print("** class doesn't exist **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

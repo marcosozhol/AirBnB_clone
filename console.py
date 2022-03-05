@@ -112,6 +112,8 @@ class HBNBCommand(cmd.Cmd):
             print("[", end="")
             print(", ".join(obj_list), end="")
             print("]")
+            """Utilizamos estos caracteres para dividir la impresion
+            de cada instansia al mostrarlas todas"""
         elif args[0] in class_personalize:
             for key in models.storage.all():
                 if args[0] in key:
@@ -128,6 +130,9 @@ class HBNBCommand(cmd.Cmd):
         integers = ["number_rooms", "number_bathrooms", "max_guest",
                     "price_by_night"]
         floats = ["latitude", "longitude"]
+        """Creamos estas dos variables para cuando el usuario indique alguno
+        de estos atributos dentro de Place, y poder actualizar sus datos a 
+        enteros o flotantes segun a donde corresponda"""
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] in class_personalize:
@@ -137,6 +142,12 @@ class HBNBCommand(cmd.Cmd):
                     if len(args) > 2:
                         if len(args) > 3:
                             if args[0] == "Place":
+                                """En este caso, dado que Place tiene argumentos
+                                de tipo entero y flotante, que las demas clases no,
+                                entonces corroboramos que el argumento se encuentre
+                                destro de las correspondientes variables que
+                                creamos anteriormente y convertimos el valor pasado
+                                en entero o flotante para luego guardarlo"""
                                 if args[2] in integers:
                                     try:
                                         args[3] = int(args[3])
@@ -151,6 +162,9 @@ class HBNBCommand(cmd.Cmd):
 
                             setattr(models.storage.all()[k], args[2], args[3])
                             models.storage.all()[k].save()
+                            """Actualizamos la clase creada (ej Place) agregando solo
+                            ARGS 2 y 3. De este modo, si el usuario pasa mas Args al
+                            mismo tiempo, solo se actulizaran los primeros."""
                         else:
                             print("** value missing **")
                     else:

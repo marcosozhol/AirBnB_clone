@@ -26,11 +26,19 @@ class BaseModel:
         self.created_at = datetime.now()
         if len(kwargs) > 0:
             for key, value in kwargs.items():
+                """loop through the key and its corresponding value"""
                 if key == "created_at" or key == "updated_at":
                     self.__dict__[key] = datetime.strptime(value, time_format)
+                    """we convert to dictionary key with the
+                    given value of the time string
+                    """
                 else:
                     if key != "__class__":
                         self.__dict__[key] = value
+                        """if key is not found in __class__ , we must add
+                        the value to
+                        this dictionary with the object's class name
+                        """
         else:
             models.storage.new(self)
 

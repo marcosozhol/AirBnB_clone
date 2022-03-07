@@ -73,3 +73,12 @@ class TestFileStorage(unittest.TestCase):
         self.assertIsNotNone(FileStorage.save.__doc__)
         self.assertTrue(FileStorage.reload.__doc__)
         self.assertIsNotNone(FileStorage.reload.__doc__)
+
+    def test_save(self):
+        """Check if save method is working"""
+
+        self.assertNotNone(models.engine.file_storage.FileStorage().save)
+
+
+if __name__ == '__main__':
+    unittest.main()

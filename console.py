@@ -142,7 +142,8 @@ class HBNBCommand(cmd.Cmd):
                     if len(args) > 2:
                         if len(args) > 3:
                             if args[0] == "Place":
-                                """En este caso, dado que Place tiene argumentos
+                                """En este caso, dado que Place tiene
+                                argumentos
                                 de tipo entero y flotante, que las demas
                                 clases no, entonces corroboramos que el
                                 argumento se encuentre dentro de las
@@ -152,18 +153,19 @@ class HBNBCommand(cmd.Cmd):
                                 if args[2] in integers:
                                     if args[3]:
                                         args[3] = int(args[3])
-                                    if args[3] == None:
+                                    if not args[3]:
                                         args[3] = 0
 
                                 elif args[2] in floats:
                                     if args[3]:
                                         args[3] = float(args[3])
-                                    if args[3] == None:
+                                    if not args[3]:
                                         args[3] = 0.0
 
                             setattr(models.storage.all()[k], args[2], args[3])
                             models.storage.all()[k].save()
-                            """Actualizamos la clase creada (ej Place) agregando solo
+                            """Actualizamos la clase creada (ej Place)
+                            agregando solo
                             ARGS 2 y 3. De este modo, si el usuario pasa mas
                             Args al mismo tiempo, solo se actulizaran los
                             primeros."""

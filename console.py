@@ -150,15 +150,15 @@ class HBNBCommand(cmd.Cmd):
                                 anteriormente y convertimos el valor pasado
                                 en entero o flotante para luego guardarlo"""
                                 if args[2] in integers:
-                                    try:
+                                    if args[3]:
                                         args[3] = int(args[3])
-                                    except:
+                                    if args[3] == None:
                                         args[3] = 0
 
                                 elif args[2] in floats:
-                                    try:
+                                    if args[3]:
                                         args[3] = float(args[3])
-                                    except:
+                                    if args[3] == None:
                                         args[3] = 0.0
 
                             setattr(models.storage.all()[k], args[2], args[3])

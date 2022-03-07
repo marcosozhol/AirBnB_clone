@@ -71,9 +71,9 @@ class HBNBCommand(cmd.Cmd):
             if len(args) > 1:
                 key = args[0] + "." + args[1]
                 """
-                En este caso si se pasan dos argumentos, concatena con punto
-                para poder ejecutar la accion, ej: show User, va a ejecutar
-                User.show para mostrar los datos de user.
+                In this case if two arguments are passed, concatenate
+                with dot to be able to execute the action, eg: show
+                User, it will execute User.show to display user data.
                 """
                 if key in models.storage.all():
                     print(models.storage.all()[key])
@@ -112,8 +112,10 @@ class HBNBCommand(cmd.Cmd):
             print("[", end="")
             print(", ".join(obj_list), end="")
             print("]")
-            """Utilizamos estos caracteres para dividir la impresion
-            de cada instansia al mostrarlas todas"""
+            """
+            We use these characters to divide the impression
+            of each instance when showing them all
+            """
         elif args[0] in class_personalize:
             for key in models.storage.all():
                 if args[0] in key:
@@ -130,9 +132,11 @@ class HBNBCommand(cmd.Cmd):
         integers = ["number_rooms", "number_bathrooms", "max_guest",
                     "price_by_night"]
         floats = ["latitude", "longitude"]
-        """Creamos estas dos variables para cuando el usuario indique alguno
-        de estos atributos dentro de Place, y poder actualizar sus datos a
-        enteros o flotantes segun a donde corresponda"""
+        """
+        We create these two variables for when the user indicates any of
+        these attributes within Place, and to be able to update their
+        data to integers or floats according to where it corresponds
+        """
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] in class_personalize:
@@ -142,14 +146,15 @@ class HBNBCommand(cmd.Cmd):
                     if len(args) > 2:
                         if len(args) > 3:
                             if args[0] == "Place":
-                                """En este caso, dado que Place tiene
-                                argumentos
-                                de tipo entero y flotante, que las demas
-                                clases no, entonces corroboramos que el
-                                argumento se encuentre dentro de las
-                                correspondientes variables que creamos
-                                anteriormente y convertimos el valor pasado
-                                en entero o flotante para luego guardarlo"""
+                                """
+                                In this case, since Place has arguments
+                                of integer and float type, than the other
+                                classes no, then we corroborate that the
+                                argument is within the corresponding
+                                variables we create above and convert the
+                                passed value in integer or float and then
+                                save it
+                                """
                                 if args[2] in integers:
                                     if args[3]:
                                         args[3] = int(args[3])
@@ -164,11 +169,13 @@ class HBNBCommand(cmd.Cmd):
 
                             setattr(models.storage.all()[k], args[2], args[3])
                             models.storage.all()[k].save()
-                            """Actualizamos la clase creada (ej Place)
-                            agregando solo
-                            ARGS 2 y 3. De este modo, si el usuario pasa mas
-                            Args al mismo tiempo, solo se actulizaran los
-                            primeros."""
+                            """
+                            We update the created class (eg Place)
+                            adding only
+                            ARGS 2 and 3. In this way, if the user spends more
+                            args at the same time, only the
+                            first
+                            """
                         else:
                             print("** value missing **")
                     else:

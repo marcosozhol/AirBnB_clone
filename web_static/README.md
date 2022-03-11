@@ -40,7 +40,7 @@ At the end of this project, you are expected to be able to explain to anyone, wi
 
 # Requirements
 
-##General
+## General
 
 - Allowed editors: vi, vim, emacs
 - All your files should end with a new line

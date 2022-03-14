@@ -6,26 +6,25 @@
 	border-radius: 4px;
 }
 
-.locations {
-	display: inline-block;
+.locations
+.amenities {
 	height: 100%;
 	width: 25%;
-	border-right: 1px #DDDDDD;
 }
 
-.amenities {
-	display: inline-block;
-	height: 100%;
-	width: 25%;
+.locantions {
+	border-right: 1px solid black;
 }
 
 h3 {
 	font-weight: 600;
 	color: #484848;
+	margin: 10px; 40px; 5px;
 }
 
 h4 {
 	font-weight: 400;
 	font-size: 14px;
 	color: black;
+	margin: 0 40px;
 }

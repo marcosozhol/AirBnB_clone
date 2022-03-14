@@ -11,20 +11,3 @@ body {
 	font-size: 14px;
 	font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-.filters button {
-        font-size: 18px;
-        color: #FFFFFF;
-        background: #FF5A5F;
-        height: 48px;
-        width: 20%;
-        border-style: none;
-        border-radius: 4px;
-        vertical-align: center;
-        margin-top: 8px;
-	float:right;
-	margin: 12px 30px;
-}
-.filters button:hover {
-	opacity: 0.9;
-}
